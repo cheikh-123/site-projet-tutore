@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="bg-slate-900 text-white">
             {/* CTA Section */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 py-16 text-center px-6">
+            <div id="download" className="bg-gradient-to-r from-indigo-600 to-purple-600 py-16 text-center px-6">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Prêt à Explorer les Données ?</h2>
                 <p className="text-indigo-100 mb-8 max-w-2xl mx-auto text-lg">
                     Téléchargez le rapport final complet ou accédez à la base de données brute corrigée au format GeoPackage.
@@ -27,6 +27,15 @@ const Footer = () => {
                         className="px-8 py-4 bg-indigo-500/20 text-white font-bold rounded-full border border-white/30 hover:bg-indigo-500/30 transition-all"
                     >
                         Accéder à la Geodatabase (GPKG)
+                    </a>
+                    <a
+                        href="https://github.com/Hlkarim/Projet-tutore-Modelisation-predictive-de-la-population-canine-en-france-"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-8 py-4 bg-slate-900 text-white font-bold rounded-full flex items-center gap-2 hover:bg-slate-800 transition-all active:scale-95 shadow-lg"
+                    >
+                        <Github className="w-5 h-5" />
+                        Voir les Scripts & Sources
                     </a>
                 </div>
             </div>

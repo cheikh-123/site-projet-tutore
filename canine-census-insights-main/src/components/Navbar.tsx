@@ -57,8 +57,7 @@ const Navbar = () => {
                     ))}
                     <div className="flex items-center space-x-4">
                         <a
-                            href="/rapport_final.pdf"
-                            download
+                            href="#download"
                             className="px-5 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-full hover:bg-indigo-700 transition-all shadow-md active:scale-95"
                         >
                             Rapport PDF
@@ -95,9 +94,9 @@ const Navbar = () => {
                             </a>
                         ))}
                         <a
-                            href="/rapport_final.pdf"
-                            download
+                            href="#download"
                             className="w-full text-center py-3 bg-indigo-600 text-white font-bold rounded-xl"
+                            onClick={() => setIsMobileMenuOpen(false)}
                         >
                             Rapport PDF
                         </a>

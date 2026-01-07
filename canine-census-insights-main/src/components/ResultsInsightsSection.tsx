@@ -1,4 +1,3 @@
-import ResidualMap from './ResidualMap';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCounter from './AnimatedCounter';
 import { Cpu, Zap } from 'lucide-react';
@@ -53,8 +52,6 @@ const ResultsInsightsSection = () => {
 
                 <ScrollReveal>
                     <div className="space-y-12">
-                        <ResidualMap />
-
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                             {kpis.map((kpi, index) => (
                                 <div
@@ -80,8 +77,8 @@ const ResultsInsightsSection = () => {
                                 <Cpu className="w-32 h-32 text-indigo-500" />
                             </div>
 
-                            <div className="grid lg:grid-cols-2 gap-12 items-center">
-                                <div className="space-y-6">
+                            <div className="flex flex-col space-y-12">
+                                <div className="space-y-6 max-w-4xl">
                                     <div className="inline-flex items-center space-x-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                                         <Zap className="w-3 h-3" />
                                         <span>Analyse Approfondie</span>
@@ -89,37 +86,36 @@ const ResultsInsightsSection = () => {
                                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Performance et Fidélité des Résidus</h3>
                                     <div className="prose dark:prose-invert max-w-none text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                                         <p>
-                                            L'analyse de la distribution des résidus (Graphique n°7) révèle une performance exceptionnelle du modèle <strong>Random Forest</strong>.
-                                            La concentration massive des erreurs autour de zéro démontre que le modèle capture l'essence structurelle de la démographie canine sans biais systématique.
+                                            L'analyse de la distribution des résidus (Graphique n°7) révèle une performance exceptionnelle du modèle <strong>Random Forest</strong>. La concentration massive des erreurs autour de zéro démontre que le modèle capture l'essence structurelle de la démographie canine sans biais systématique.
                                         </p>
-                                        <ul className="space-y-3">
-                                            <li>
-                                                <strong className="text-gray-900 dark:text-gray-200">Dispersion Contrôlée :</strong>
-                                                La distribution suit une loi quasi-normale centrée, avec une <strong>MAE médiane de ~38 chiens</strong>, ce qui est négligeable au regard de la précision demandée pour les politiques publiques.
-                                            </li>
-                                            <li>
-                                                <strong className="text-gray-900 dark:text-gray-200">Gestion des Outliers :</strong>
-                                                Les rares écarts extrêmes correspondent aux communes atypiques (refuges, zones de chasse intense) identifiées lors de l'audit initial, confirmant que l'erreur du modèle est corrélée à des facteurs exogènes non démographiques.
-                                            </li>
-                                            <li>
-                                                <strong className="text-gray-900 dark:text-gray-200">Stabilité Prédictive :</strong>
-                                                L'absence de traîne lourde (fat tails) dans les résidus valide la robustesse de l'approche par Random Forest face aux anciens modèles Poisson/Tweedie.
-                                            </li>
-                                        </ul>
+                                        <div className="grid md:grid-cols-3 gap-6 mt-8">
+                                            <div className="space-y-2">
+                                                <strong className="text-gray-900 dark:text-gray-200 block text-base">Dispersion Contrôlée</strong>
+                                                <p className="text-xs">La distribution suit une loi quasi-normale centrée, avec une MAE médiane de <strong>~38 chiens</strong>, ce qui est négligeable au regard de la précision demandée.</p>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <strong className="text-gray-900 dark:text-gray-200 block text-base">Gestion des Outliers</strong>
+                                                <p className="text-xs">Les rares écarts correspondent aux communes atypiques (refuges, zones de chasse) confirmant que l'erreur est corrélée à des facteurs exogènes.</p>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <strong className="text-gray-900 dark:text-gray-200 block text-base">Stabilité Prédictive</strong>
+                                                <p className="text-xs">L'absence de traîne lourde (fat tails) valide la robustesse de l'approche par <strong>Random Forest</strong> face aux anciens modèles.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="relative rounded-xl overflow-hidden bg-white p-4 border border-gray-100 dark:border-gray-700 shadow-inner">
+                                <div className="relative rounded-2xl overflow-hidden bg-gray-50 dark:bg-gray-900/50 p-6 md:p-10 border border-gray-100 dark:border-gray-700 shadow-inner flex flex-col items-center justify-center">
                                     <img
                                         src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/galerie/performance_residus.png`}
                                         alt="Performance des Résidus"
-                                        className="w-full h-auto object-contain rounded-lg"
+                                        className="w-full max-w-5xl h-auto object-contain rounded-xl dark:mix-blend-lighten contrast-125"
                                         onError={(e) => {
                                             const target = e.target as HTMLImageElement;
-                                            target.src = "https://placehold.co/600x400?text=Image+Analyse+Non+Trouvée";
+                                            target.src = "https://placehold.co/600x400?text=Image+Performance+Non+Trouv%C3%A9e";
                                         }}
                                     />
-                                    <div className="mt-4 text-center">
-                                        <span className="text-[10px] text-gray-400 italic">Figure 7 : Courbe de densité et distribution des erreurs résiduelles</span>
+                                    <div className="mt-6 text-center">
+                                        <span className="text-xs text-gray-400 font-medium italic">Figure 7 : Distribution et densité des résidus du modèle final</span>
                                     </div>
                                 </div>
                             </div>

@@ -25,7 +25,7 @@ const MethodSection = () => {
   const methods = [
     {
       step: '01',
-      title: 'Récupération Temporelle',
+      title: 'Imputation Temporelle',
       description: 'Analyse des historiques de données sur la période 2013-2019 pour identifier les patterns de population.',
       icon: (
         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -28,16 +28,18 @@ const DataStructureSection = () => {
 
                 <div className="grid lg:grid-cols-2 gap-8">
                     {/* JSON Block */}
-                    <div className="bg-gray-900 rounded-xl p-6 shadow-xl">
-                        <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-3 h-3 rounded-full bg-red-400" />
-                            <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                            <div className="w-3 h-3 rounded-full bg-green-400" />
-                            <span className="text-gray-400 text-xs ml-4">Format de donnée brute (JSON/GeoJSON)</span>
+                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm flex flex-col items-center justify-center">
+                        <h3 className="font-semibold text-gray-900 mb-4 flex items-center w-full">
+                            <span className="w-2 h-6 bg-indigo-600 rounded mr-2" />
+                            Répartition de la Typologie des Communes
+                        </h3>
+                        <div className="relative rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-900/50 p-4 border border-gray-100 dark:border-gray-700 shadow-inner w-full flex items-center justify-center">
+                            <img
+                                src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/galerie/typologie_nan.png`}
+                                alt="Répartition de la Typologie des Communes"
+                                className="w-full h-auto object-contain rounded-md dark:mix-blend-lighten contrast-125"
+                            />
                         </div>
-                        <pre className="text-blue-300 font-mono text-sm overflow-x-auto">
-                            <code>{rawJson}</code>
-                        </pre>
                     </div>
 
                     {/* Table Block */}

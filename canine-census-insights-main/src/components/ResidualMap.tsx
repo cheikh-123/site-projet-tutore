@@ -142,7 +142,7 @@ const ResidualMap = () => {
                         <div className="h-[600px] w-full relative">
                             <MapContainer
                                 center={[46.603354, 1.888334]}
-                                zoom={7}
+                                zoom={6}
                                 className="h-full w-full"
                                 scrollWheelZoom={true}
                                 preferCanvas={true}

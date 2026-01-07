@@ -47,22 +47,24 @@ const HeroSection = () => {
           <div className="absolute top-0 left-0 w-1 h-full bg-white/20"></div>
           <div className="text-center space-y-3 border-r border-white/20 pr-4">
             <span className="block text-4xl md:text-5xl font-bold">
-              <AnimatedCounter end={36594} />
+              <AnimatedCounter end={0.90} decimals={2} />
             </span>
             <div className="space-y-1">
-              <span className="block text-xs md:text-sm uppercase tracking-widest text-white font-semibold">Communes</span>
-              <p className="text-[10px] md:text-xs text-white/60 leading-tight">Couverture exhaustive du territoire national.</p>
+              <span className="block text-xs md:text-sm uppercase tracking-widest text-white font-semibold">R² Score</span>
+              <p className="text-[10px] md:text-xs text-white/60 leading-tight">Modèle précis à 90% sur l'ensemble du territoire.</p>
             </div>
           </div>
           <div className="text-center space-y-3">
             <span className="block text-4xl md:text-5xl font-bold">
-              <AnimatedCounter end={10879} />
+              <AnimatedCounter end={38} />
             </span>
             <div className="space-y-1">
-              <span className="block text-xs md:text-sm uppercase tracking-widest text-white font-semibold">NaNs Retrouvés</span>
-              <p className="text-[10px] md:text-xs text-white/60 leading-tight">Restauration des zones blanches par proxy.</p>
+              <span className="block text-xs md:text-sm uppercase tracking-widest text-white font-semibold">MAE Médiane</span>
+              <p className="text-[10px] md:text-xs text-white/60 leading-tight">Fiable à 38 chiens près par commune.</p>
             </div>
           </div>
+
+
         </div>
       </div>
 

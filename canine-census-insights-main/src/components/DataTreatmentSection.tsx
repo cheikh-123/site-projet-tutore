@@ -29,7 +29,7 @@ const DataTreatmentSection = () => {
     const pipeline = [
         { num: 1, title: 'Importation', desc: 'Lecture du Shapefile et des données sociodémographiques.' },
         { num: 2, title: 'Fusion Spatiale', desc: 'Jointures des données historiques (2013-2019) par Code Insee.' },
-        { num: 3, title: 'Enrichissement', desc: 'Récupération temporelle des données manquantes.' },
+        { num: 3, title: 'Enrichissement', desc: 'Imputation temporelle des données manquantes (historique 2013-2019).' },
         { num: 4, title: 'Imputation Spatiale', desc: 'Application du KNN K=5 et Spatial Lag pour les NaNs finaux.' },
     ];
 
