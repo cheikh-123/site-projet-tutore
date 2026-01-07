@@ -12,11 +12,21 @@ const Footer = () => {
                     Téléchargez le rapport final complet ou accédez à la base de données brute corrigée au format GeoPackage.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                    <a href="/rapport.pdf" download className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-full hover:shadow-xl transition-all active:scale-95">
-                        Télécharger le Rapport PDF
+                    <a
+                        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/rapport_final.pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-8 py-4 bg-white text-indigo-600 font-bold rounded-full hover:shadow-xl transition-all active:scale-95"
+                    >
+                        Consulter le Rapport PDF
                     </a>
-                    <a href="/donnees.gpkg" download className="px-8 py-4 bg-indigo-500/20 text-white font-bold rounded-full border border-white/30 hover:bg-indigo-500/30 transition-all">
-                        Données Gpkg
+                    <a
+                        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/donnees.gpkg`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-8 py-4 bg-indigo-500/20 text-white font-bold rounded-full border border-white/30 hover:bg-indigo-500/30 transition-all"
+                    >
+                        Accéder à la Geodatabase (GPKG)
                     </a>
                 </div>
             </div>

@@ -1,54 +1,53 @@
-# Welcome to your Lovable project
+# Site Projet Tutoré
 
-## Project info
+## 🚀 Comment lancer le site localement
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Pour que vos collaborateurs puissent ouvrir et travailler sur le site, suivez ces étapes :
 
-## How can I edit this code?
+### Prérequis
+- Node.js installé (version 18 ou supérieure recommandée)
+- npm ou yarn installé
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Instructions
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Étape 1: Cloner le dépôt
+git clone https://github.com/cheikh-123/site-projet-tutore.git
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Étape 2: Aller dans le dossier du projet
+cd site-projet-tutore/canine-census-insights-main
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Étape 3: Installer les dépendances
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Étape 4: Lancer le serveur de développement
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Une fois le serveur lancé, le site sera accessible à l'adresse affichée dans le terminal (généralement `http://localhost:5173`).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Autres commandes utiles
 
-**Use GitHub Codespaces**
+```sh
+# Construire le projet pour la production
+npm run build
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Prévisualiser la version de production
+npm run preview
+
+# Vérifier le code avec ESLint
+npm run lint
+```
+
+## 📝 Contribution
+
+Pour contribuer au projet :
+
+1. Créez une nouvelle branche : `git checkout -b ma-nouvelle-fonctionnalite`
+2. Faites vos modifications
+3. Committez vos changements : `git commit -m "Ajout d'une nouvelle fonctionnalité"`
+4. Poussez vers GitHub : `git push origin ma-nouvelle-fonctionnalite`
+5. Créez une Pull Request sur GitHub
 
 ## What technologies are used for this project?
 
@@ -60,14 +59,25 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## 🛠️ Technologies utilisées
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Ce projet utilise :
+- **Vite** - Build tool et serveur de développement
+- **React** - Bibliothèque JavaScript pour l'interface utilisateur
+- **TypeScript** - Typage statique pour JavaScript
+- **Tailwind CSS** - Framework CSS utilitaire
+- **shadcn/ui** - Composants UI réutilisables
+- **React Router** - Routage pour les applications React
 
-## Can I connect a custom domain to my Lovable project?
+## 📦 Structure du projet
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```
+canine-census-insights-main/
+├── src/
+│   ├── components/     # Composants React
+│   ├── pages/          # Pages de l'application
+│   ├── hooks/          # Hooks personnalisés
+│   └── lib/            # Utilitaires
+├── public/             # Fichiers statiques
+└── package.json        # Dépendances du projet
+```

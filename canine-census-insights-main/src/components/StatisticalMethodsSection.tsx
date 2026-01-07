@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 const StatisticalMethodsSection = () => {
     const cards = [
         { title: 'Statistiques Descriptives', items: ['Skewness & Kurtosis', 'Dispersion des Ratios', 'Distribution spatiale des NaNs'], icon: <BarChart3 className="w-5 h-5" /> },
-        { title: 'Inférence & Validation', items: ['P-valeurs significative (<0.01)', 'Intervalle de confiance (95%)', 'Analyse du score de Moran'], icon: <Activity className="w-5 h-5" /> },
-        { title: 'Modélisation GLM', items: ['Loi de Tweedie (Power p≈1.5)', 'Lien Logarithmique', 'Optimisation par Quasi-Likelihood'], icon: <Cpu className="w-5 h-5" /> },
+        { title: 'Inférence & Validation', items: ['Validation croisée', 'MAE Médian: 38 chiens', 'R² = 0.90'], icon: <Activity className="w-5 h-5" /> },
+        { title: 'Modélisation Random Forest', items: ['Ensemble Learning', 'Non-linéarité', 'Robustesse aux Outliers'], icon: <Cpu className="w-5 h-5" /> },
     ];
 
     return (
@@ -16,7 +16,7 @@ const StatisticalMethodsSection = () => {
                 <div className="text-center mb-16 space-y-4">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Méthodes Statistiques</h2>
                     <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-                        Notre approche repose sur l'exploitation de la colinéarité entre densités humaine et canine via des Modèles Linéaires Généralisés (GLM).
+                        Notre approche utilise un modèle <strong>Random Forest</strong> (Forêts Aléatoires) pour capturer les relations complexes et non-linéaires entre la démographie humaine et canine, surpassant les modèles linéaires traditionnels.
                     </p>
                 </div>
 
@@ -35,13 +35,13 @@ const StatisticalMethodsSection = () => {
                     <div className="p-8 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700">
                         <h3 className="text-lg font-bold text-indigo-900 dark:text-indigo-300 mb-4 flex items-center">
                             <Cpu className="w-5 h-5 mr-2" />
-                            Modélisation GLM
+                            Choix du Modèle : Random Forest
                         </h3>
                         <div className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                            Les données de comptage ne suivant pas une loi normale, nous avons testé deux distributions :
+                            Les modèles linéaires (Poisson, Tweedie) ont montré leurs limites face à l'extrême variance des données (450k+).
                             <ul className="mt-2 space-y-2">
-                                <li><strong>Poisson</strong> : Idéal pour les zones urbaines denses.</li>
-                                <li><strong>Tweedie</strong> : Indispensable pour les zones rurales où la sur-dispersion (variance &gt; moyenne) est marquée.</li>
+                                <li><strong>Problème</strong> : Incapacité à gérer simultanément les métropoles et les micro-villages ("Plafond de verre").</li>
+                                <li><strong>Solution</strong> : Le Random Forest gère nativement cette hétérogénéité et les effets de seuil non-linéaires.</li>
                             </ul>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ const StatisticalMethodsSection = () => {
                             Validation & R²
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                            La fiabilité est mesurée par le <strong>coefficient de détermination R²</strong>. Avec un score de 0.94, la variance est expliquée de manière quasi-exhaustive. Nous complétons cette validation par une analyse des résidus pour vérifier l'absence de biais systématique.
+                            La fiabilité est mesurée par le <strong>coefficient de détermination R²</strong>. Avec un score de 0.90, le modèle explique 90% de la variance observée. L'erreur absolue médiane (MAE) est de seulement 38 chiens, prouvant une grande précision locale malgré la dispersion nationale.
                         </p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ const StatisticalMethodsSection = () => {
                 <div className="grid lg:grid-cols-2 gap-8 mb-16">
                     {/* Visualisation 1: Modèles */}
                     <div className="bg-indigo-900 text-white rounded-2xl p-8 shadow-xl">
-                        <h3 className="font-bold mb-4">Ajustement de la Loi de Tweedie</h3>
+                        <h3 className="font-bold mb-4">Importance des Variables (Feature Importance)</h3>
                         <div className="h-48 border-l border-b border-white/20 relative flex items-end px-4 space-x-2">
                             <div className="flex-1 bg-white/10 h-[20%] rounded-t" />
                             <div className="flex-1 bg-white/20 h-[45%] rounded-t" />
@@ -70,13 +70,13 @@ const StatisticalMethodsSection = () => {
                             <div className="absolute top-4 right-4 text-[10px] text-white/60 uppercase tracking-widest">Convergence Stochastic</div>
                         </div>
                         <p className="text-xs text-indigo-200 mt-6 italic">
-                            Le paramètre de puissance de la loi de Tweedie permet de modéliser la "masse au zéro" typique des petites communes rurales sans déclaration.
+                            La population humaine (2020) domine largement, suivie par la densité, le lag spatial et la superficie. Les variables socio-économiques fines n'apportent qu'un gain marginal.
                         </p>
                     </div>
 
                     {/* Visualisation 2: Corrélation */}
                     <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
-                        <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-center text-indigo-600 dark:text-indigo-400">Force du Proxy : R² = 0.94</h3>
+                        <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-center text-indigo-600 dark:text-indigo-400">Force du Modèle : R² = 0.90</h3>
                         <div className="relative h-48 bg-gray-50 dark:bg-gray-900/50 rounded-xl flex items-center justify-center p-8">
                             <div className="absolute inset-0 opacity-10 dark:opacity-20" style={{ backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)', backgroundSize: '10px 10px' }} />
                             <div className="w-full h-px bg-indigo-500/20 absolute rotate-[320deg]" />

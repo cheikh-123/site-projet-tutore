@@ -39,7 +39,7 @@ const HeroSection = () => {
             La démographie humaine comme proxy du nombre de chiens
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-xl">
-            Ce projet propose une estimation inédite du nombre de chiens pour l'ensemble des communes de France. En utilisant la démographie humaine comme proxy statistique, nous avons restauré les données manquantes pour offrir une cartographie complète de la population canine nationale.
+            Ce projet propose une estimation inédite du nombre de chiens pour l'ensemble des communes de France. En utilisant la démographie humaine comme proxy statistique (Random Forest), nous avons restauré les données manquantes pour offrir une cartographie complète de la population canine nationale.
           </p>
         </div>
 
@@ -69,7 +69,7 @@ const HeroSection = () => {
       {/* Abstract background shapes */}
       <div className="absolute top-1/4 -right-20 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
       <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl" />
-    </section>
+    </section >
   );
 };
 

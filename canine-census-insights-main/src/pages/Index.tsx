@@ -5,7 +5,6 @@ import StatisticalMethodsSection from "@/components/StatisticalMethodsSection";
 import ResultsInsightsSection from "@/components/ResultsInsightsSection";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
-
 import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => {

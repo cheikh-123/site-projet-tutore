@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Search, Trash2, Zap, ShieldCheck } from 'lucide-react';
+import { Search, Trash2, Zap, ShieldCheck, Database, Cpu } from 'lucide-react';
 
 const DataSection = () => {
     const sampleData = [
@@ -10,45 +10,43 @@ const DataSection = () => {
         { id: "01004", commune: "Ambérieu-en-Bugey", pop_hum: 14081, dogs_2020: 1842 },
     ];
 
-    const rawJson = `{
-  "insee": "75001",
-  "commune": "Paris",
-  "metrics": {
-    "pop_2020": 2145906,
-    "statut_initial": "NaN",
-    "potentiel_reconstruction": "Élevé"
-  }
-}`;
+    const gpkgSchema = `CREATE TABLE communes_canines (
+  insee TEXT PRIMARY KEY,
+  nom_commune TEXT,
+  pop_humaine INTEGER,
+  chiens_2020 INTEGER,
+  geom MULTIPOLYGON
+);
+
+-- Exemple de requête spatiale
+SELECT nom_commune, chiens_2020 
+FROM communes_canines 
+WHERE ST_Intersects(geom, :roi);`;
 
     const steps = [
         {
             title: 'Audit Temporel',
-            desc: '42,6% des NaNs de 2020 ont pu être restaurés via les données historiques (2013-2019).',
+            desc: 'Analyse de 4 663 communes à historique partiel (42,6% des NaNs) : reconstruction via l\'année valide la plus récente, corrigée au prorata de l\'évolution démographique humaine.',
             icon: <Search className="w-6 h-6 text-indigo-600" />,
         },
         {
-            title: 'Filtrage Outliers',
-            desc: 'Élimination des communes avec un ratio chiens/humains > 0.5 (erratiques).',
-            icon: <Trash2 className="w-6 h-6 text-indigo-600" />,
-        },
-        {
-            title: 'Standardisation',
-            desc: 'Alignement des codes INSEE et fusion avec la base ADMIN-EXPRESS de l\'IGN.',
-            icon: <Zap className="w-6 h-6 text-indigo-600" />,
-        },
-        {
-            title: 'Validation KNN',
-            desc: 'Imputation des 57,4% restants par voisinage spatial (K=5) et lag temporel.',
+            title: 'Spatial Lag',
+            desc: 'Captation de la dépendance spatiale pour neutraliser les biais de voisinage culturels, permettant au modèle d\'isoler la variabilité structurelle de la composante régionale.',
             icon: <ShieldCheck className="w-6 h-6 text-indigo-600" />,
+        },
+        {
+            title: 'Données INSEE',
+            desc: 'Enrichissement via la structure des ménages, la typologie des communes et des variables socio-démographiques fines.',
+            icon: <Database className="w-6 h-6 text-indigo-600" />,
+        },
+        {
+            title: 'Entrainement du Modèle',
+            desc: 'Réalisation de plusieurs tests et optimisation des hyperparamètres du modèle Random Forest pour garantir une robustesse optimale (MAE médiane ~38, R² = 0.90).',
+            icon: <Cpu className="w-6 h-6 text-indigo-600" />,
         },
     ];
 
-    const pipeline = [
-        { num: 1, title: 'Extraction Source', desc: 'Lecture des flux I-CAD et recalage sur les limites communales.' },
-        { num: 2, title: 'Analyse des Ruptures', desc: 'Identification des zones de non-déclaration (zones blanches).' },
-        { num: 3, title: 'Reconstruction Temporelle', desc: 'Utilisation de la plus ancienne valeur valide entre 2013 et 2019 comme base de calcul.' },
-        { num: 4, title: 'Estimation Finale', desc: 'Calcul de la population canine finale par modèles de régression robustes.' },
-    ];
+
 
     return (
         <section id="structure" className="py-24 bg-white dark:bg-background transition-colors duration-300">
@@ -65,10 +63,10 @@ const DataSection = () => {
                             <div className="w-3 h-3 rounded-full bg-red-400" />
                             <div className="w-3 h-3 rounded-full bg-yellow-400" />
                             <div className="w-3 h-3 rounded-full bg-green-400" />
-                            <span className="text-gray-400 text-xs ml-4">Format JSON / GeoJSON</span>
+                            <span className="text-gray-400 text-xs ml-4">Format GeoPackage (GPKG)</span>
                         </div>
                         <pre className="text-blue-300 font-mono text-sm overflow-x-auto">
-                            <code>{rawJson}</code>
+                            <code>{gpkgSchema}</code>
                         </pre>
                     </div>
 
@@ -106,11 +104,11 @@ const DataSection = () => {
 
                 {/* Treatment Row */}
                 <div className="mb-24">
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-10 text-center">Processus de Nettoyage</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-10 text-center">Traitement des Données</h3>
                     <div className="grid md:grid-cols-4 gap-6">
                         {steps.map((step, idx) => (
-                            <div key={idx} className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow text-center">
-                                <div className="w-12 h-12 bg-white dark:bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-sm">
+                            <div key={idx} className="bento-card text-center group">
+                                <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform">
                                     {step.icon}
                                 </div>
                                 <h4 className="font-bold text-gray-900 dark:text-white mb-2">{step.title}</h4>
@@ -120,22 +118,86 @@ const DataSection = () => {
                     </div>
                 </div>
 
-                {/* Pipeline Section */}
-                <div className="max-w-4xl mx-auto">
-                    <h3 className="text-xl font-bold text-indigo-900 dark:text-indigo-300 mb-8 flex items-center justify-center">
-                        <span className="w-8 h-px bg-indigo-200 dark:bg-indigo-500/30 mr-4" />
-                        Pipeline de Traitement des Données
-                        <span className="w-8 h-px bg-indigo-200 dark:bg-indigo-500/30 ml-4" />
-                    </h3>
-                    <div className="space-y-4">
-                        {pipeline.map((item, idx) => (
-                            <div key={idx} className="flex items-center space-x-6 group">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold shadow-lg transform group-hover:scale-110 transition-transform text-sm">
-                                    {item.num}
+                {/* Gallery Section */}
+                <div className="mt-24">
+                    <div className="text-center mb-12">
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Galerie Scientifique Complète</h3>
+                        <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto italic">
+                            Retrouvez l'ensemble des analyses graphiques ayant permis la validation de notre méthodologie.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {[
+                            {
+                                title: "Distribution Initiale",
+                                image: "distrib_pop.png",
+                                interpretation: "Superposition des densités de population. On observe une forte corrélation visuelle dès les données brutes."
+                            },
+                            {
+                                title: "Typologie des Anomalies",
+                                image: "typologie_anomalies.png",
+                                interpretation: "Identification des erreurs de saisie et des valeurs aberrantes avant le processus de nettoyage."
+                            },
+                            {
+                                title: "Analyse de la Vacuité",
+                                image: "typologie_nan.png",
+                                interpretation: "85% des NaNs sont des zones blanches structurelles, justifiant l'usage d'un proxy démographique."
+                            },
+                            {
+                                title: "Complétude des Données",
+                                image: "completude_donnees.png",
+                                interpretation: "État des lieux de la couverture territoriale avant et après l'audit temporel."
+                            },
+                            {
+                                title: "Corrélation Brute (Log)",
+                                image: "scatter_log_initial.png",
+                                interpretation: "Relation logarithmique initiale montrant la dispersion avant filtrage des outliers."
+                            },
+                            {
+                                title: "Corrélation Nettoyée",
+                                image: "scatter_log_cleaned.png",
+                                interpretation: "L'alignement quasi-parfait après nettoyage confirme la validité du proxy humain (R² = 0.90)."
+                            },
+                            {
+                                title: "Performance des Résidus",
+                                image: "performance_residus.png",
+                                interpretation: "Distribution des erreurs du modèle final, montrant une concentration autour de zéro (MAE médiane ~38)."
+                            },
+                            {
+                                title: "Cartographie des Résidus",
+                                image: "residues_map.png",
+                                interpretation: "Visualisation géographique de la précision du modèle sur l'ensemble des communes."
+                            },
+                            {
+                                title: "Clusters Spatiaux (LISA)",
+                                image: "cluster_residus.png",
+                                interpretation: "L'analyse LISA montre une absence de biais spatial systématique (Moran's I proche de 0)."
+                            },
+                            {
+                                title: "Stabilité du Modèle",
+                                image: "stabilite_modele.png",
+                                interpretation: "Validation croisée montrant la robustesse du Random Forest face aux variations du jeu de données."
+                            }
+                        ].map((item, idx) => (
+                            <div key={idx} className="bento-card group flex flex-col overflow-hidden">
+                                <div className="relative aspect-video mb-6 overflow-hidden rounded-lg bg-white p-2 border border-gray-100 dark:border-gray-800">
+                                    <img
+                                        src={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/galerie/${item.image}`}
+                                        alt={item.title}
+                                        className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                                        onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.src = "https://placehold.co/600x400?text=Image+Non+Trouvée";
+                                        }}
+                                    />
                                 </div>
-                                <div className="flex-grow bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm group-hover:border-indigo-200 dark:group-hover:border-indigo-400 transition-colors">
-                                    <h4 className="font-bold text-gray-800 dark:text-gray-200 text-sm">{item.title}</h4>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</p>
+                                <h4 className="font-bold text-lg text-indigo-900 dark:text-indigo-300 mb-2">{item.title}</h4>
+                                <div className="bg-indigo-50/50 dark:bg-indigo-950/30 p-4 rounded-xl border border-indigo-100/50 dark:border-indigo-500/20 flex-grow">
+                                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed italic">
+                                        <span className="font-bold text-indigo-600 dark:text-indigo-400 not-italic">Interprétation : </span>
+                                        {item.interpretation}
+                                    </p>
                                 </div>
                             </div>
                         ))}
